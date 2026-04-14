@@ -4,9 +4,19 @@ export function useMediaLibrary() {
   const [images, setImages] = useState<string[]>([]);
 
   // Load images on mount
-  useEffect(() => {
-    const saved = localStorage.getItem("media-library");
-    if (saved) setImages(JSON.parse(saved));
+useEffect(() => {
+    const timer = setTimeout(() => {
+      try {
+        const saved = localStorage.getItem("media-library");
+        if (saved) {
+          setImages(JSON.parse(saved));
+        }
+      } catch (error) {
+        console.error("Failed to load media gallery:", error);
+      }
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Sync to localStorage
