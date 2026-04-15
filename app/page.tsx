@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Save, Menu, ChevronLeft, ShieldCheck, User as UserIcon } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Components
 import Editor from "@/components/ui/Editor";

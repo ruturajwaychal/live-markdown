@@ -9,9 +9,9 @@ import {
   Trash2,
   Copy,
   Check,
-  Lock,
-  ShieldCheck,
-  User as UserIcon,
+//   Lock,
+//   ShieldCheck,
+//   User as UserIcon,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,25 +19,22 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { UserRole } from "../hooks/use-auth";
 import { useMediaLibrary } from "../hooks/use-media-library";
+
 // Ensure this is imported
 
 interface SidebarProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose: () => void; // This was the missing link
   role: UserRole;
   toggleRole: () => void;
 }
 
 export default function Sidebar({
   isOpen,
-  role,
-  toggleRole,
-}: {
-  isOpen: boolean;
-  role: string;
-  toggleRole: () => void;
-}) {
-  const isAdmin = role === "ADMIN";
+  onClose,
+
+}: SidebarProps) {
+//   const isAdmin = role === "ADMIN";
   const { images, addImage, removeImage } = useMediaLibrary();
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
@@ -67,6 +64,16 @@ export default function Sidebar({
         <span className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase">
           Workspace
         </span>
+
+        {/* Add the onClick={onClose} here! */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-6 w-6"
+          onClick={onClose}
+        >
+          <X className="h-4 w-4" />
+        </Button>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
